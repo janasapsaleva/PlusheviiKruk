@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PlusheviiKruk — вязаные игрушки ручной работы на заказ</title>
+<meta name="description" content="Тёплые вязаные игрушки ручной работы на заказ: зайки, медвежата и комплекты одежды из детской полухлопковой пряжи YarnArt Jeans. Заказ в Telegram и Instagram.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #f3eadb;
+    --cream-alt: #ebdfca;
+    --card: #fbf6ee;
+    --line: #e6d8c3;
+    --rose: #d98c8c;
+    --rose-dark: #b5616a;
+    --sage: #8fae95;
+    --sage-dark: #4b6850;
+    --mustard: #e3b964;
+    --text: #3d2f2a;
+    --text-2: #6f5f56;
+    --radius: 22px;
+    --shadow: 0 6px 22px rgba(61, 47, 42, .08);
+    /* бледная вязаная фактура: ряды V-образных петель */
+    --knit: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='20' viewBox='0 0 24 20'%3E%3Cg fill='none' stroke='%23d6c3a6' stroke-width='1.6' stroke-linecap='round' opacity='.55'%3E%3Cpath d='M2 2 Q6 12 12 18'/%3E%3Cpath d='M22 2 Q18 12 12 18'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--text);
+    font: 400 17px/1.6 "Nunito", system-ui, sans-serif;
+  }
+  img { max-width: 100%; display: block; }
+  h1, h2, h3 { font-family: "Comfortaa", "Nunito", sans-serif; font-weight: 700; line-height: 1.25; margin: 0 0 .6em; }
+  h1 { font-size: clamp(1.9rem, 4.2vw, 3rem); }
+  h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+  h3 { font-size: 1.15rem; }
+  p { margin: 0 0 1em; }
+  a { color: var(--rose-dark); }
+  a:focus-visible, .btn:focus-visible {
+    outline: 3px solid var(--sage-dark);
+    outline-offset: 3px;
+    border-radius: 999px;
+  }
+  .wrap { width: min(1160px, 100% - 32px); margin-inline: auto; }
+  .label {
+    font-weight: 800;
+    font-size: .78rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--text-2);
+  }
+  .skip {
+    position: absolute; left: 16px; top: -60px;
+    background: var(--text); color: #fff; padding: 8px 16px; border-radius: 999px; z-index: 10;
+  }
+  .skip:focus { top: 12px; }
+
+  /* Кнопки-«таблетки» */
+  .btn {
+    display: inline-flex; align-items: center; gap: .5em;
+    padding: .85em 1.6em;
+    border-radius: 999px;
+    font-weight: 800;
+    text-decoration: none;
+    border: 2px solid transparent;
+    transition: background-color .2s, color .2s, box-shadow .2s;
+  }
+  .btn-main { background: var(--rose); color: var(--text); }
+  .btn-main:hover { background: var(--rose-dark); color: #fff; }
+  .btn-soft { background: transparent; color: var(--sage-dark); border-color: var(--sage); }
+  .btn-soft:hover { background: var(--sage); color: var(--text); }
+  .btn:hover { box-shadow: 0 4px 14px rgba(61, 47, 42, .16); }
+
+  /* Шапка */
+  .site-header {
+    background: var(--cream-alt) var(--knit);
+    border-bottom: 2px dashed var(--line);
+  }
+  .site-header .wrap {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 14px 0;
+  }
+  .logo {
+    font-family: "Comfortaa", sans-serif; font-weight: 700; font-size: 1.3rem;
+    color: var(--text); text-decoration: none;
+    display: inline-flex; align-items: center; gap: .45em;
+  }
+  .site-nav { display: flex; gap: 22px; flex-wrap: wrap; }
+  .site-nav a { color: var(--text); text-decoration: none; font-weight: 700; }
+  .site-nav a:hover { color: var(--rose-dark); }
+
+  /* Первый экран */
+  .hero { padding: clamp(40px, 7vw, 88px) 0; overflow: hidden; }
+  .hero .wrap {
+    display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(28px, 5vw, 64px); align-items: center;
+  }
+  .hero p.lead { font-size: 1.12rem; color: var(--text-2); max-width: 36em; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+  .hero-media { position: relative; }
+  .hero-ball {
+    position: absolute; width: 120px; left: -46px; bottom: -26px; z-index: 2;
+    filter: drop-shadow(0 6px 10px rgba(61,47,42,.15));
+  }
+  .sway { transform-origin: 50% 0; animation: sway 6s ease-in-out infinite; }
+  @keyframes sway { 0%,100% { transform: rotate(-4deg); } 50% { transform: rotate(4deg); } }
+
+  /* Фото-контейнеры со «строчкой» */
+  /* Фото закреплено внутри рамки: загрузка картинки не меняет высоту карточки и не сдвигает страницу */
+  .photo {
+    --pad: 8px;
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius);
+    border: 2px dashed var(--line);
+    background: var(--card);
+    overflow: hidden;
+  }
+  @supports not (aspect-ratio: 4 / 5) {
+    .photo::before { content: ""; display: block; padding-top: 125%; }
+  }
+  .photo img {
+    position: absolute;
+    top: var(--pad); left: var(--pad);
+    width: calc(100% - 2 * var(--pad)); height: calc(100% - 2 * var(--pad));
+    object-fit: cover; object-position: 50% 30%;
+    border-radius: calc(var(--radius) - 8px);
+  }
+
+  /* Секции */
+  section { padding: clamp(56px, 8vw, 96px) 0; scroll-margin-top: 12px; }
+  section.alt { background: var(--cream-alt); }
+  .section-head { max-width: 680px; margin-bottom: 36px; }
+  .section-head p { color: var(--text-2); }
+  .divider { height: 22px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='22' viewBox='0 0 28 22'%3E%3Cg fill='none' stroke='%23d98c8c' stroke-width='2' stroke-linecap='round' opacity='.55'%3E%3Cpath d='M3 4 Q8 16 14 19 Q20 16 25 4'/%3E%3Cpath d='M8 4 Q11 12 14 14 Q17 12 20 4'/%3E%3C/g%3E%3C/svg%3E") center / 28px 22px repeat-x; }
+
+  /* Каталог */
+  .catalog-note {
+    display: flex; flex-wrap: wrap; gap: 10px 22px; margin: -12px 0 32px; color: var(--text-2);
+  }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  .card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 14px 14px 20px;
+    display: flex; flex-direction: column;
+  }
+  .card .photo { --pad: 6px; }
+  .card-body { padding: 16px 6px 0; display: flex; flex-direction: column; flex: 1; }
+  .card h3 { margin-bottom: .35em; }
+  .card .meta { color: var(--text-2); font-size: .95rem; margin-bottom: 14px; }
+  .badge {
+    display: inline-block; align-self: flex-start;
+    background: #e5efe6; color: var(--sage-dark);
+    font-weight: 800; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase;
+    padding: .3em .9em; border-radius: 999px; margin-bottom: 10px;
+  }
+  .card-foot { margin-top: auto; display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .price { font-weight: 800; font-size: 1.35rem; color: var(--rose-dark); }
+  .price small { font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; margin-left: .2em; }
+  .price.ask { font-size: 1rem; }
+  .order-link { font-weight: 800; color: var(--sage-dark); }
+  .order-link:hover { color: var(--rose-dark); }
+
+  /* Блоки с текстом */
+  .two-col { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
+  .facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 28px; }
+  .fact {
+    background: var(--card); border-radius: 18px; padding: 18px 20px; box-shadow: var(--shadow);
+  }
+  .fact h3 { font-size: 1rem; margin-bottom: .35em; }
+  .fact p { margin: 0; font-size: .96rem; color: var(--text-2); }
+  .icon { width: 30px; height: 30px; color: var(--sage-dark); margin-bottom: 8px; }
+
+  .custom { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .tile {
+    background: var(--card); border: 2px dashed var(--line); border-radius: var(--radius);
+    padding: 26px 24px; text-align: center;
+  }
+  .tile .big { font-family: "Comfortaa", sans-serif; font-weight: 700; font-size: 1.9rem; color: var(--rose-dark); display: block; margin: .2em 0 .25em; }
+  .tile p { margin: 0; color: var(--text-2); }
+
+  .steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; counter-reset: step; }
+  .steps li {
+    counter-increment: step;
+    background: var(--card); border-radius: var(--radius); padding: 24px 22px; box-shadow: var(--shadow);
+  }
+  .steps li::before {
+    content: counter(step);
+    display: grid; place-items: center;
+    width: 42px; height: 42px; border-radius: 50%;
+    background: var(--rose); color: var(--text);
+    font-family: "Comfortaa", sans-serif; font-weight: 700; margin-bottom: 12px;
+  }
+  .steps h3 { font-size: 1.02rem; }
+  .steps p { margin: 0; color: var(--text-2); font-size: .96rem; }
+
+  .care { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+  .care article { background: var(--card); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+  .care p { margin: 0; color: var(--text-2); }
+
+  .promo {
+    background: var(--card); border: 2px dashed var(--rose); border-radius: var(--radius);
+    padding: clamp(24px, 4vw, 40px); display: flex; gap: 24px; align-items: center;
+  }
+  .promo .big { font-family: "Comfortaa", sans-serif; font-weight: 700; font-size: clamp(2.2rem, 5vw, 3.2rem); color: var(--rose-dark); white-space: nowrap; }
+  .promo p { margin: 0; font-size: 1.08rem; }
+
+  .terms { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
+  .terms article { background: var(--card); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+  .terms p { margin: 0; color: var(--text-2); }
+
+  .contacts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+  .contact {
+    background: var(--card); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow);
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .contact a { font-weight: 800; font-size: 1.05rem; word-break: break-word; }
+
+  /* Футер */
+  .site-footer {
+    background: var(--cream-alt) var(--knit);
+    border-top: 2px dashed var(--line);
+    padding: 36px 0;
+    color: var(--text-2);
+    font-size: .95rem;
+  }
+  .site-footer .wrap { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; align-items: center; }
+  .site-footer .logo { font-size: 1.1rem; }
+
+  @media (max-width: 1020px) {
+    .steps { grid-template-columns: repeat(2, 1fr); }
+    .contacts { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 860px) {
+    .site-nav { display: none; }
+    .hero .wrap, .two-col { grid-template-columns: 1fr; }
+    .hero-media { max-width: 420px; margin-inline: auto; width: 100%; }
+    .hero-ball { width: 92px; left: -12px; }
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .custom, .care, .terms { grid-template-columns: 1fr; }
+    .promo { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 560px) {
+    body { font-size: 16px; }
+    .grid, .facts, .steps, .contacts { grid-template-columns: 1fr; }
+    .hero-actions .btn { width: 100%; justify-content: center; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .sway { animation: none; }
+    .btn { transition: none; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">К содержанию</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="PlusheviiKruk — на главную">
+      <svg width="32" height="32" viewBox="0 0 40 40" aria-hidden="true">
+        <defs>
+          <clipPath id="logo-ball-clip"><circle cx="20" cy="20" r="17"/></clipPath>
+          <radialGradient id="logo-ball-shade" cx="38%" cy="32%" r="75%">
+            <stop offset="0" stop-color="#fff" stop-opacity=".3"/>
+            <stop offset=".55" stop-color="#fff" stop-opacity="0"/>
+            <stop offset="1" stop-color="#7a3f45" stop-opacity=".4"/>
+          </radialGradient>
+        </defs>
+        <circle cx="20" cy="20" r="17" fill="#d98c8c"/>
+        <g clip-path="url(#logo-ball-clip)" fill="none" stroke-width="1.3" stroke-linecap="round">
+          <g transform="rotate(-20 20 20)" stroke="#bf6f72" opacity="0.9"><path d="M3 20 A17 2.0 0 0 1 37 20"/><path d="M3 20 A17 4.6 0 0 1 37 20"/><path d="M3 20 A17 7.2 0 0 1 37 20"/><path d="M3 20 A17 9.8 0 0 1 37 20"/><path d="M3 20 A17 12.4 0 0 1 37 20"/><path d="M3 20 A17 15.0 0 0 1 37 20"/></g><g transform="rotate(70 20 20)" stroke="#e3a0a1" opacity="0.95"><path d="M3 20 A17 3.0 0 0 0 37 20"/><path d="M3 20 A17 5.6 0 0 0 37 20"/><path d="M3 20 A17 8.2 0 0 0 37 20"/><path d="M3 20 A17 10.8 0 0 0 37 20"/><path d="M3 20 A17 13.4 0 0 0 37 20"/><path d="M3 20 A17 16.0 0 0 0 37 20"/></g><g transform="rotate(140 20 20)" stroke="#c97a7c" opacity="0.9"><path d="M3 20 A17 4.0 0 0 1 37 20"/><path d="M3 20 A17 6.4 0 0 1 37 20"/><path d="M3 20 A17 8.8 0 0 1 37 20"/><path d="M3 20 A17 11.2 0 0 1 37 20"/><path d="M3 20 A17 13.6 0 0 1 37 20"/></g><g transform="rotate(25 20 20)" stroke="#f2c6c6" opacity="1"><path d="M3 20 A17 7.0 0 0 0 37 20"/><path d="M3 20 A17 9.3 0 0 0 37 20"/><path d="M3 20 A17 11.6 0 0 0 37 20"/><path d="M3 20 A17 13.9 0 0 0 37 20"/><path d="M3 20 A17 16.2 0 0 0 37 20"/></g><g transform="rotate(-60 20 20)" stroke="#f7dcdc" opacity="1"><path d="M3 20 A17 10.0 0 0 1 37 20"/><path d="M3 20 A17 12.2 0 0 1 37 20"/><path d="M3 20 A17 14.4 0 0 1 37 20"/><path d="M3 20 A17 16.6 0 0 1 37 20"/></g>
+        </g>
+        <circle cx="20" cy="20" r="17" fill="url(#logo-ball-shade)"/>
+      </svg>
+      PlusheviiKruk
+    </a>
+    <nav class="site-nav" aria-label="Разделы страницы">
+      <a href="#catalog">Каталог</a>
+      <a href="#custom">На заказ</a>
+      <a href="#order">Как заказать</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- 1. Первый экран -->
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div>
+        <p class="label">Вязаные игрушки ручной работы на заказ</p>
+        <h1>Тёплые игрушки, связанные руками</h1>
+        <p class="lead">Мягкие друзья для детей и взрослых, уютное украшение для дома и душевный подарок для тех, кто вам дорог. Каждая игрушка — петелька к петельке, со своим характером.</p>
+        <div class="hero-actions">
+          <a class="btn btn-main" href="#catalog">Выбрать игрушку</a>
+          <a class="btn btn-soft order-link-btn" href="https://t.me/burik270467" target="_blank" rel="noopener">Заказать в Telegram</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <div class="photo">
+          <img src="images/komplekt-odezhdy.jpg" width="750" height="1000" alt="Вязаная зайка и разложенный рядом комплект одежды: шапочка с помпоном, платье с фатином, розовое пальто, пинетки и сумочка">
+        </div>
+        <svg class="hero-ball sway" viewBox="0 0 120 140" role="img" aria-label="Клубок пряжи">
+          <defs>
+            <clipPath id="ball-clip"><circle cx="60" cy="78" r="42"/></clipPath>
+            <radialGradient id="ball-shade" cx="38%" cy="32%" r="75%">
+              <stop offset="0" stop-color="#fff" stop-opacity=".3"/>
+              <stop offset=".55" stop-color="#fff" stop-opacity="0"/>
+              <stop offset="1" stop-color="#7a3f45" stop-opacity=".4"/>
+            </radialGradient>
+          </defs>
+          <path d="M60 0 C 56 14, 68 22, 60 38" fill="none" stroke="#c97a7c" stroke-width="2.4" stroke-linecap="round"/>
+          <circle cx="60" cy="78" r="42" fill="#d98c8c"/>
+          <g clip-path="url(#ball-clip)" fill="none" stroke-width="1.9" stroke-linecap="round">
+            <g transform="rotate(-20 60 78)" stroke="#bf6f72" opacity="0.9"><path d="M18 78 A42 4.0 0 0 1 102 78"/><path d="M18 78 A42 7.2 0 0 1 102 78"/><path d="M18 78 A42 10.4 0 0 1 102 78"/><path d="M18 78 A42 13.6 0 0 1 102 78"/><path d="M18 78 A42 16.8 0 0 1 102 78"/><path d="M18 78 A42 20.0 0 0 1 102 78"/><path d="M18 78 A42 23.2 0 0 1 102 78"/><path d="M18 78 A42 26.4 0 0 1 102 78"/><path d="M18 78 A42 29.6 0 0 1 102 78"/><path d="M18 78 A42 32.8 0 0 1 102 78"/><path d="M18 78 A42 36.0 0 0 1 102 78"/><path d="M18 78 A42 39.2 0 0 1 102 78"/></g><g transform="rotate(70 60 78)" stroke="#e3a0a1" opacity="0.95"><path d="M18 78 A42 6.0 0 0 0 102 78"/><path d="M18 78 A42 9.2 0 0 0 102 78"/><path d="M18 78 A42 12.4 0 0 0 102 78"/><path d="M18 78 A42 15.6 0 0 0 102 78"/><path d="M18 78 A42 18.8 0 0 0 102 78"/><path d="M18 78 A42 22.0 0 0 0 102 78"/><path d="M18 78 A42 25.2 0 0 0 102 78"/><path d="M18 78 A42 28.4 0 0 0 102 78"/><path d="M18 78 A42 31.6 0 0 0 102 78"/><path d="M18 78 A42 34.8 0 0 0 102 78"/><path d="M18 78 A42 38.0 0 0 0 102 78"/></g><g transform="rotate(140 60 78)" stroke="#c97a7c" opacity="0.9"><path d="M18 78 A42 10.0 0 0 1 102 78"/><path d="M18 78 A42 13.0 0 0 1 102 78"/><path d="M18 78 A42 16.0 0 0 1 102 78"/><path d="M18 78 A42 19.0 0 0 1 102 78"/><path d="M18 78 A42 22.0 0 0 1 102 78"/><path d="M18 78 A42 25.0 0 0 1 102 78"/><path d="M18 78 A42 28.0 0 0 1 102 78"/><path d="M18 78 A42 31.0 0 0 1 102 78"/><path d="M18 78 A42 34.0 0 0 1 102 78"/></g><g transform="rotate(25 60 78)" stroke="#f2c6c6" opacity="1"><path d="M18 78 A42 18.0 0 0 0 102 78"/><path d="M18 78 A42 20.8 0 0 0 102 78"/><path d="M18 78 A42 23.6 0 0 0 102 78"/><path d="M18 78 A42 26.4 0 0 0 102 78"/><path d="M18 78 A42 29.2 0 0 0 102 78"/><path d="M18 78 A42 32.0 0 0 0 102 78"/><path d="M18 78 A42 34.8 0 0 0 102 78"/><path d="M18 78 A42 37.6 0 0 0 102 78"/></g><g transform="rotate(-60 60 78)" stroke="#f7dcdc" opacity="1"><path d="M18 78 A42 26.0 0 0 1 102 78"/><path d="M18 78 A42 28.6 0 0 1 102 78"/><path d="M18 78 A42 31.2 0 0 1 102 78"/><path d="M18 78 A42 33.8 0 0 1 102 78"/><path d="M18 78 A42 36.4 0 0 1 102 78"/><path d="M18 78 A42 39.0 0 0 1 102 78"/></g>
+          </g>
+          <circle cx="60" cy="78" r="42" fill="url(#ball-shade)"/>
+          <path d="M96 96 C 110 104, 100 122, 114 136" fill="none" stroke="#c97a7c" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- 2. Каталог -->
+  <section id="catalog" class="alt" aria-labelledby="catalog-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Каталог</p>
+        <h2 id="catalog-title">Наши игрушки</h2>
+        <p>Здесь — примеры работ. Любую игрушку свяжем для вас на заказ: в похожих цветах или в своих. Цена указана за одну игрушку, в белорусских рублях.</p>
+      </div>
+      <div class="catalog-note">
+        <span class="label">Зайка — 50,00 BYN</span>
+        <span class="label">Медвежонок — 30,00 BYN</span>
+        <span class="label">Комплект одежды — 25,00 BYN</span>
+        <span class="label">Тюльпан — 10,00 BYN</span>
+        <span class="label">Срок — 10–15 дней</span>
+      </div>
+
+      <div class="grid">
+
+        <article class="card">
+          <div class="photo"><img src="images/tri-zayki.jpg" width="750" height="1000" loading="lazy" alt="Три вязаные зайки на пушистом пледе: в голубом, жёлтом и зелёном нарядах"></div>
+          <div class="card-body">
+            <span class="badge">Под заказ · 10–15 дней</span>
+            <h3>Три зайки: голубая, жёлтая, зелёная</h3>
+            <p class="meta">Полухлопковая пряжа YarnArt Jeans</p>
+            <div class="card-foot"><span class="price">50,00<small>BYN за зайку</small></span><a class="order-link" href="https://t.me/burik270467" target="_blank" rel="noopener">Заказать</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="photo"><img src="images/zayka-zheltoe-plate.jpg" width="750" height="1000" loading="lazy" alt="Вязаная зайка в солнечно-жёлтом платье с поясом, горчичной шапочке и ботиночках"></div>
+          <div class="card-body">
+            <span class="badge">Под заказ · 10–15 дней</span>
+            <h3>Зайка в жёлтом платье</h3>
+            <p class="meta">Полухлопковая пряжа YarnArt Jeans</p>
+            <div class="card-foot"><span class="price">50,00<small>BYN</small></span><a class="order-link" href="https://t.me/burik270467" target="_blank" rel="noopener">Заказать</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="photo"><img src="images/komplekt-odezhdy.jpg" width="750" height="1000" loading="lazy" alt="Вязаная зайка и разложенный рядом комплект одежды: шапочка с помпоном, платье с фатином, розовое пальто, пинетки и сумочка"></div>
+          <div class="card-body">
+            <span class="badge">Под заказ · 10–15 дней</span>
+            <h3>Комплект одежды на любую игрушку</h3>
+            <p class="meta">Шапочка, платье, пальто, обувь — свяжем по размеру вашей игрушки</p>
+            <div class="card-foot"><span class="price">25,00<small>BYN</small></span><a class="order-link" href="https://t.me/burik270467" target="_blank" rel="noopener">Заказать</a></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="photo"><img src="images/zayka-rozovoe-palto.jpg" width="562" height="1000" loading="lazy" alt="Серая вязаная зайка в розовом пальто с пуговицами, белой шапочке и с белой сумочкой"></div>
+          <div class="card-body">
+            <span class="badge">Под заказ · 10–15 дней</span>
+            <h3>Зайка в розовом пальто</h3>
+            <p class="meta">Полухлопковая пряжа YarnArt Jeans</p>
+            <div class="card-foot"><span class="price">50,00<small>BYN</small></span><a class="order-link" href="https://t.me/burik270467" target="_blank" rel="noopener">Заказать</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="photo"><img src="images/zayka-sinee-plate-morkovka.jpg" width="562" height="1000" loading="lazy" alt="Вязаная зайка в синем платье с сердечком и капюшоне, в сумочке морковка"></div>
+          <div class="card-body">
+            <span class="badge">Под заказ · 10–15 дней</span>
+            <h3>Зайка в синем платье</h3>
+            <p class="meta">Полухлопковая пряжа YarnArt Jeans</p>
+            <div class="card-foot"><span class="price">50,00<small>BYN</small></span><a class="order-link" href="https://t.me/burik270467" target="_blank" rel="noopener">Заказать</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="photo"><img src="images/medved-korichnevyi.jpg" width="562" height="1000" loading="lazy" alt="Коричневый вязаный медвежонок со светлой мордочкой в ладони"></div>
+          <div class="card-body">
+            <span class="badge">Под заказ · 10–15 дней</span>
+            <h3>Медвежонок</h3>
+            <p class="meta">Полухлопковая пряжа YarnArt Jeans</p>
+            <div class="card-foot"><span class="price">30,00<small>BYN</small></span><a class="order-link" href="https://t.me/burik270467" target="_blank" rel="noopener">Заказать</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="photo"><img src="images/zayka-zelenaya-yubka.jpg" width="750" height="1000" loading="lazy" alt="Серая вязаная зайка в салатовой кофточке, шляпке и пышной зелёной фатиновой юбке"></div>
+          <div class="card-body">
+            <span class="badge">Под заказ · 10–15 дней</span>
+            <h3>Зайка в зелёной юбке</h3>
+            <p class="meta">Полухлопковая пряжа YarnArt Jeans</p>
+            <div class="card-foot"><span class="price">50,00<small>BYN</small></span><a class="order-link" href="https://t.me/burik270467" target="_blank" rel="noopener">Заказать</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="photo"><img src="images/zayki-sinie-svitery.jpg" width="750" height="1000" loading="lazy" alt="Две вязаные зайки в шапочках и свитерах: девочка в белом с синей юбкой и мальчик в синем со штанишками"></div>
+          <div class="card-body">
+            <span class="badge">Под заказ · 10–15 дней</span>
+            <h3>Зайки в зимних свитерах</h3>
+            <p class="meta">Полухлопковая пряжа YarnArt Jeans</p>
+            <div class="card-foot"><span class="price">50,00<small>BYN за зайку</small></span><a class="order-link" href="https://t.me/burik270467" target="_blank" rel="noopener">Заказать</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="photo"><img src="images/zayki-golubye-yubki.jpg" width="750" height="1000" loading="lazy" alt="Две вязаные зайки в голубых беретах, кофточках и фатиновых юбках, с сумочками"></div>
+          <div class="card-body">
+            <span class="badge">Под заказ · 10–15 дней</span>
+            <h3>Зайки в голубых беретах</h3>
+            <p class="meta">Полухлопковая пряжа YarnArt Jeans</p>
+            <div class="card-foot"><span class="price">50,00<small>BYN за зайку</small></span><a class="order-link" href="https://t.me/burik270467" target="_blank" rel="noopener">Заказать</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="photo"><img src="images/zayka-shapka-ushanka.jpg" width="750" height="1000" loading="lazy" alt="Вязаная зайка в зелёной шапке-ушанке, светлом свитере с красным сердечком и мятной юбке"></div>
+          <div class="card-body">
+            <span class="badge">Под заказ · 10–15 дней</span>
+            <h3>Зайка в шапке-ушанке</h3>
+            <p class="meta">Полухлопковая пряжа YarnArt Jeans</p>
+            <div class="card-foot"><span class="price">50,00<small>BYN</small></span><a class="order-link" href="https://t.me/burik270467" target="_blank" rel="noopener">Заказать</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="photo"><img src="images/zayka-zelenoe-palto.jpg" width="750" height="1000" loading="lazy" alt="Вязаная зайка в зелёном пальто с жемчужными пуговицами, шапочке и сапожках"></div>
+          <div class="card-body">
+            <span class="badge">Под заказ · 10–15 дней</span>
+            <h3>Зайка в зелёном пальто</h3>
+            <p class="meta">Полухлопковая пряжа YarnArt Jeans</p>
+            <div class="card-foot"><span class="price">50,00<small>BYN</small></span><a class="order-link" href="https://t.me/burik270467" target="_blank" rel="noopener">Заказать</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="photo"><img src="images/zayki-oranzhevye-sumochki.jpg" width="750" height="1000" loading="lazy" alt="Две вязаные зайки в голубых нарядах с фатиновыми юбками и оранжевыми сумочками"></div>
+          <div class="card-body">
+            <span class="badge">Под заказ · 10–15 дней</span>
+            <h3>Зайки с оранжевыми сумочками</h3>
+            <p class="meta">Полухлопковая пряжа YarnArt Jeans</p>
+            <div class="card-foot"><span class="price">50,00<small>BYN за зайку</small></span><a class="order-link" href="https://t.me/burik270467" target="_blank" rel="noopener">Заказать</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="photo"><img src="images/zayki-zheltoe-i-korallovoe-plate.jpg" width="562" height="1000" loading="lazy" alt="Две вязаные зайки: в жёлтом платье с вышитыми цветами и в коралловом платье с бирюзовыми бусинками"></div>
+          <div class="card-body">
+            <span class="badge">Под заказ · 10–15 дней</span>
+            <h3>Зайки-подружки в летних платьях</h3>
+            <p class="meta">Полухлопковая пряжа YarnArt Jeans</p>
+            <div class="card-foot"><span class="price">50,00<small>BYN за зайку</small></span><a class="order-link" href="https://t.me/burik270467" target="_blank" rel="noopener">Заказать</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="photo"><img src="images/zayka-persikovyi-kombinezon.jpg" width="562" height="1000" loading="lazy" alt="Вязаная зайка в персиковом комбинезоне с рюшами и голубой повязке на голове"></div>
+          <div class="card-body">
+            <span class="badge">Под заказ · 10–15 дней</span>
+            <h3>Зайка в персиковом комбинезоне</h3>
+            <p class="meta">Полухлопковая пряжа YarnArt Jeans</p>
+            <div class="card-foot"><span class="price">50,00<small>BYN</small></span><a class="order-link" href="https://t.me/burik270467" target="_blank" rel="noopener">Заказать</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="photo"><img src="images/medved-zheltaya-kurtka.jpg" width="562" height="1000" loading="lazy" alt="Коричневый вязаный медвежонок в жёлтой курточке с капюшоном"></div>
+          <div class="card-body">
+            <span class="badge">Под заказ · 10–15 дней</span>
+            <h3>Медвежонок в жёлтой курточке</h3>
+            <p class="meta">Полухлопковая пряжа YarnArt Jeans</p>
+            <div class="card-foot"><span class="price">30,00<small>BYN</small></span><a class="order-link" href="https://t.me/burik270467" target="_blank" rel="noopener">Заказать</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="photo"><img src="images/zayki-rozovyi-i-sinii.jpg" width="750" height="1000" loading="lazy" alt="Две вязаные зайки у окна: в розовом и в синем, с морковками в сумочках"></div>
+          <div class="card-body">
+            <span class="badge">Под заказ · 10–15 дней</span>
+            <h3>Зайки с морковками</h3>
+            <p class="meta">Полухлопковая пряжа YarnArt Jeans</p>
+            <div class="card-foot"><span class="price">50,00<small>BYN за зайку</small></span><a class="order-link" href="https://t.me/burik270467" target="_blank" rel="noopener">Заказать</a></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="photo"><img src="images/tyulpany.jpg" width="750" height="1000" loading="lazy" alt="Букет вязаных тюльпанов: красные, коралловые и жёлтые бутоны на зелёных стеблях"></div>
+          <div class="card-body">
+            <span class="badge">Под заказ · 10–15 дней</span>
+            <h3>Вязаные тюльпаны</h3>
+            <p class="meta">Букет, который не завянет</p>
+            <div class="card-foot"><span class="price">10,00<small>BYN за 1 шт.</small></span><a class="order-link" href="https://t.me/burik270467" target="_blank" rel="noopener">Заказать</a></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- 3. Игрушка на заказ -->
+  <section id="custom" aria-labelledby="custom-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Игрушка на заказ</p>
+        <h2 id="custom-title">Свяжем вашего героя</h2>
+        <p>Выберите игрушку из фото в каталоге или пришлите фото своего персонажа — мастер свяжет его для вас.</p>
+      </div>
+      <div class="custom">
+        <div class="tile">
+          <span class="label">Что можно выбрать</span>
+          <span class="big">Фото или свой</span>
+          <p>игрушку из каталога или персонажа по вашему фото</p>
+        </div>
+        <div class="tile">
+          <span class="label">Срок изготовления</span>
+          <span class="big">10–15 дней</span>
+          <p>каждую игрушку вяжем вручную</p>
+        </div>
+        <div class="tile">
+          <span class="label">Предоплата</span>
+          <span class="big">20%</span>
+          <p>переводом на карту</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- 4. О мастерице и материалах -->
+  <section id="about" class="alt" aria-labelledby="about-title">
+    <div class="wrap two-col">
+      <div class="photo">
+        <img src="images/pryazha-korzina.jpg" width="1000" height="1000" loading="lazy" alt="Плетёная корзина с клубками пряжи в зелёных, бежевых и розовых тонах и спицы на вязаном полотне">
+      </div>
+      <div>
+        <p class="label">О мастерице и материалах</p>
+        <h2 id="about-title">Одни руки, многолетний опыт</h2>
+        <p>Все игрушки в каталоге связаны руками одного мастера с многолетним опытом. Она чувствует пряжу до миллиметра: петельки ложатся одна к одной, игрушка держит форму после стирки, а наполнитель надёжно спрятан внутри.</p>
+        <p>Мастер вкладывает душу в характер каждого героя — от выражения мордочки до мельчайших деталей одежды. На каждую игрушку можно связать несколько комплектов одежды.</p>
+        <p>Каждую игрушку вяжем вручную, поэтому она может немного отличаться от фото: оттенком пряжи, выражением мордочки. Так у каждой появляется свой характер.</p>
+
+        <div class="facts">
+          <div class="fact">
+            <svg class="icon" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="12" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 13c6-3 14-3 20 1M5 19c7-4 15-3 22 1M12 5c-2 7-1 16 4 23" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <h3>Пряжа YarnArt Jeans</h3>
+            <p>Детская полухлопковая пряжа (55% хлопок, 45% акрил): гипоаллергенна, не колется, не пушится и не линяет.</p>
+          </div>
+          <div class="fact">
+            <svg class="icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M8 22c-3-3-3-8 0-11s8-3 11 0 3 8 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M13 26c-3-3-3-8 0-11s8-3 11 0 3 8 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <h3>Наполнитель — холлофайбер</h3>
+            <p>Гипоаллергенный, «пружинит» и держит форму, не впитывает запахи и влагу, быстро сохнет после стирки.</p>
+          </div>
+          <div class="fact">
+            <svg class="icon" viewBox="0 0 32 32" aria-hidden="true"><circle cx="11" cy="14" r="3" fill="currentColor"/><circle cx="21" cy="14" r="3" fill="currentColor"/><path d="M11 22c3 2 7 2 10 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <h3>Надёжные глазки</h3>
+            <p>Детали мордочки вышиты вручную или закреплены на безопасном винтовом креплении.</p>
+          </div>
+          <div class="fact">
+            <svg class="icon" viewBox="0 0 32 32" aria-hidden="true"><path d="M4 10l6 12 6-12 6 12 6-12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <h3>Плотная вязка</h3>
+            <p>Вяжем очень плотно по авторским схемам — наполнитель не выбивается наружу ни в играх, ни при стирке.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- 5. Как заказать -->
+  <section id="order" aria-labelledby="order-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Как заказать</p>
+        <h2 id="order-title">Четыре мягких шага</h2>
+        <p>Заказ принимаем в Telegram и Instagram.</p>
+      </div>
+      <ol class="steps">
+        <li><h3>Выберите игрушку</h3><p>Из каталога или пришлите фото своего персонажа.</p></li>
+        <li><h3>Напишите нам</h3><p>В Telegram <a href="https://t.me/burik270467" target="_blank" rel="noopener">@burik270467</a> или Instagram <a href="https://instagram.com/elenaburaja27" target="_blank" rel="noopener">elenaburaja27</a>.</p></li>
+        <li><h3>Предоплата 20%</h3><p>Переводом на карту. Игрушка будет готова за 10–15 дней.</p></li>
+        <li><h3>Доставка</h3><p>СДЭК или почтой в любую точку мира.</p></li>
+      </ol>
+      <p style="margin-top:32px"><a class="btn btn-main" href="https://t.me/burik270467" target="_blank" rel="noopener">Заказать в Telegram</a></p>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- 6. Уход и безопасность -->
+  <section id="care" class="alt" aria-labelledby="care-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Уход и безопасность</p>
+        <h2 id="care-title">Как ухаживать за игрушкой</h2>
+        <p>Наши игрушки практичны: переносят бережную стирку, сохраняя форму, мягкость и цвет.</p>
+      </div>
+      <div class="care">
+        <article>
+          <h3>Машинная стирка</h3>
+          <p>Деликатный режим или режим «Шерсть/Шёлк» при 30 °C.</p>
+        </article>
+        <article>
+          <h3>Возраст: 0+</h3>
+          <p>Для малышей до года рекомендуем модели с вышитыми глазками.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- 7. Акции -->
+  <section id="promo" aria-labelledby="promo-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Акции</p>
+        <h2 id="promo-title">Чем больше друзей — тем приятнее</h2>
+      </div>
+      <div class="promo">
+        <span class="big">−10 BYN</span>
+        <p>При заказе от трёх игрушек — скидка 10 рублей на каждую.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- 8. Условия -->
+  <section id="terms" class="alt" aria-labelledby="terms-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Условия</p>
+        <h2 id="terms-title">Доставка, оплата, возврат</h2>
+      </div>
+      <div class="terms">
+        <article>
+          <h3>Заказ</h3>
+          <p>В Telegram @burik270467 или Instagram elenaburaja27.</p>
+        </article>
+        <article>
+          <h3>Доставка</h3>
+          <p>В любую точку мира СДЭК или почтой. Стоимость рассчитывает служба доставки в зависимости от места назначения.</p>
+        </article>
+        <article>
+          <h3>Оплата</h3>
+          <p>Переводом на карту. Для игрушки на заказ — предоплата 20%.</p>
+        </article>
+        <article>
+          <h3>Возврат</h3>
+          <p>Если игрушка придёт повреждённой, мы вернём вам деньги.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
+  <!-- 9. Контакты -->
+  <section id="contacts" aria-labelledby="contacts-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Контакты</p>
+        <h2 id="contacts-title">Напишите нам</h2>
+        <p>Расскажите, какую игрушку хотите, — ответим и всё подскажем.</p>
+      </div>
+      <div class="contacts">
+        <div class="contact"><span class="label">Telegram</span><a href="https://t.me/burik270467" target="_blank" rel="noopener">@burik270467</a></div>
+        <div class="contact"><span class="label">Instagram</span><a href="https://instagram.com/elenaburaja27" target="_blank" rel="noopener">elenaburaja27</a></div>
+        <div class="contact"><span class="label">Почта</span><a href="mailto:elena_buraja@mail.ru">elena_buraja@mail.ru</a></div>
+        <div class="contact"><span class="label">Телефон</span><a href="tel:+375447487481">+375 44 748-74-81</a></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <a class="logo" href="#top">PlusheviiKruk</a>
+    <span>Вязаные игрушки ручной работы на заказ</span>
+    <a href="https://t.me/burik270467" target="_blank" rel="noopener">Заказать в Telegram</a>
+  </div>
+</footer>
+</body>
+</html>
