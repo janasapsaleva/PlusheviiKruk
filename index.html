@@ -227,6 +227,28 @@
   .terms article { background: var(--card); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
   .terms p { margin: 0; color: var(--text-2); }
 
+  .faq { display: grid; gap: 14px; max-width: 820px; }
+  .faq details {
+    background: var(--card); border-radius: 18px; box-shadow: var(--shadow);
+  }
+  .faq summary {
+    list-style: none; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    padding: 18px 22px;
+    font-family: "Comfortaa", "Nunito", sans-serif; font-weight: 700; font-size: 1.05rem;
+    border-radius: 18px;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: "+"; flex: none;
+    display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%;
+    background: var(--rose); color: var(--text); font-family: "Nunito", sans-serif; font-weight: 800; font-size: 1.2rem;
+    transition: transform .2s;
+  }
+  .faq details[open] summary::after { transform: rotate(45deg); }
+  .faq summary:hover { color: var(--rose-dark); }
+  .faq summary:focus-visible { outline: 3px solid var(--sage-dark); outline-offset: 3px; }
+  .faq details p { margin: 0; padding: 0 22px 20px; color: var(--text-2); }
   .contacts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
   .contact {
     background: var(--card); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow);
@@ -294,6 +316,7 @@
     html { scroll-behavior: auto; }
     .sway { animation: none; }
     .btn { transition: none; }
+    .faq summary::after { transition: none; }
   }
 </style>
 </head>
@@ -734,8 +757,78 @@
 
   <div class="divider" aria-hidden="true"></div>
 
+  <!-- Частые вопросы -->
+  <section id="faq" aria-labelledby="faq-title">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="label">Частые вопросы</p>
+        <h2 id="faq-title">Отвечаем на ваши вопросы</h2>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>Можно выбрать размер игрушки?</summary>
+          <p>Да, мы вяжем игрушки разного размера. Цена зависит от размера — точную стоимость подскажет мастер.</p>
+        </details>
+        <details>
+          <summary>А цвет?</summary>
+          <p>Да. Любую игрушку из каталога свяжем в похожих цветах или в ваших: например, под интерьер детской или любимый цвет малыша.</p>
+        </details>
+        <details>
+          <summary>Можно заказать другой наряд?</summary>
+          <p>Конечно. Мы вяжем разные наряды: платья, пальто, свитера, комбинезоны, шапочки, сумочки и обувь. Наряд можно выбрать из примеров в каталоге или собрать свой из понравившихся деталей.</p>
+        </details>
+        <details>
+          <summary>Можно докупить одежду к игрушке?</summary>
+          <p>Да. Комплект одежды стоит 25,00 BYN, его можно связать на любую игрушку. На одну игрушку можно связать несколько комплектов, чтобы переодевать её.</p>
+        </details>
+        <details>
+          <summary>Сколько ждать заказ?</summary>
+          <p>10–15 дней: каждую игрушку мастер вяжет вручную.</p>
+        </details>
+        <details>
+          <summary>Как оплатить?</summary>
+          <p>Переводом на карту. Для игрушки на заказ — предоплата 20%.</p>
+        </details>
+        <details>
+          <summary>Куда вы доставляете?</summary>
+          <p>В любую точку мира, СДЭК или почтой. Стоимость доставки рассчитывает служба в зависимости от места назначения.</p>
+        </details>
+        <details>
+          <summary>Из чего связаны игрушки?</summary>
+          <p>Из детской полухлопковой пряжи YarnArt Jeans (55% хлопок, 45% акрил): она гипоаллергенна, не колется, не пушится и не линяет. Внутри — холлофайбер: игрушка держит форму и быстро сохнет после стирки.</p>
+        </details>
+        <details>
+          <summary>Подойдёт ли игрушка малышу?</summary>
+          <p>Возраст 0+. Глазки вышиты вручную или закреплены на безопасном винтовом креплении. Для малышей до года рекомендуем модели с вышитыми глазками.</p>
+        </details>
+        <details>
+          <summary>Как стирать игрушку?</summary>
+          <p>В машинке на деликатном режиме или режиме «Шерсть/Шёлк» при 30 °C.</p>
+        </details>
+        <details>
+          <summary>Игрушка будет точно как на фото?</summary>
+          <p>Каждую игрушку вяжем вручную, поэтому она может немного отличаться от фото — оттенком пряжи или выражением мордочки. Так у каждой появляется свой характер.</p>
+        </details>
+        <details>
+          <summary>Есть ли скидки?</summary>
+          <p>При заказе от трёх игрушек — скидка 10 BYN на каждую.</p>
+        </details>
+        <details>
+          <summary>Что, если игрушка придёт повреждённой?</summary>
+          <p>Мы вернём вам деньги.</p>
+        </details>
+        <details>
+          <summary>Как сделать заказ?</summary>
+          <p>Напишите нам в Telegram <a href="https://t.me/burik270467" target="_blank" rel="noopener">@burik270467</a> или в Instagram <a href="https://instagram.com/elenaburaja27" target="_blank" rel="noopener">elenaburaja27</a>.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"></div>
+
   <!-- 9. Контакты -->
-  <section id="contacts" aria-labelledby="contacts-title">
+  <section id="contacts" class="alt" aria-labelledby="contacts-title">
     <div class="wrap">
       <div class="section-head">
         <p class="label">Контакты</p>
